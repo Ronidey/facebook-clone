@@ -1,3 +1,16 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --clr-light: #e9ebee;
+  --shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  --clr-primary: #0064e0;
+  --top-spacing: 82px;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +18,389 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+  user-select: none;
+  background: var(--clr-light);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 0.5rem 0;
+  line-height: 1.2;
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 1rem 0;
+}
+
+textarea {
+  font-family: inherit;
+}
+
+input[type='text'] {
+  padding: 1rem 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+select {
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+ul {
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+
+/* ----------- Utility Classes -------------- */
+.d-flex {
+  display: flex;
+}
+
+.d-flex-inline {
+  display: inline-flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
+
+.cursor-p {
+  cursor: pointer;
+}
+
+.fw-md {
+  font-weight: 500;
+}
+.fw-sb {
+  font-weight: 600;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.ml-sm {
+  margin-left: 0.5rem;
+}
+.ml-md {
+  margin-left: 1rem;
+}
+.ml-lg {
+  margin-left: 1rem;
+}
+
+.mr-sm {
+  margin-right: 0.5rem;
+}
+.mr-md {
+  margin-right: 1rem;
+}
+.mr-lg {
+  margin-right: 2rem;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-sm {
+  margin-bottom: 0.5rem;
+}
+
+.mb-md {
+  margin-bottom: 1rem;
+}
+
+.mb-lg {
+  margin-bottom: 2rem;
+}
+
+.mt-sm {
+  margin-top: 0.5rem;
+}
+
+.mt-md {
+  margin-top: 1rem;
+}
+
+.mt-lg {
+  margin-top: 2rem;
+}
+
+.m-0 {
+  margin: 0;
+}
+
+.my-sm {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.my-md {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.my-lg {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.mx-sm {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+.mx-md {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+.mx-lg {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+/* ----- Padding -------- */
+.p-0 {
+  padding: 0;
+}
+
+.p-sm {
+  padding: 0.5rem;
+}
+.p-md {
+  padding: 0.75rem;
+}
+.p-lg {
+  padding: 1rem;
+}
+
+.py-sm {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.py-md {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.py-lg {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.px-sm {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.px-md {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+.px-lg {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.lh-0 {
+  line-height: 0;
+}
+
+.HomepageMain {
+  padding: 1.5rem 0.5rem;
+}
+
+@media (min-width: 500px) {
+  .HomepageMain {
+    padding: 1.5rem;
+  }
+}
+
+/* ---- Buttons ---- */
+.btn {
+  padding: 0.5rem 0.75rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.btn-lg {
+  width: 100px;
+  height: 40px;
+}
+
+.btn-100 {
+  width: 100%;
+}
+
+.btn-primary {
+  background: #0064e0;
+  color: #fff;
+  transition: background 200ms ease;
+}
+
+.btn-primary:disabled {
+  filter: opacity(0.5);
+  cursor: default;
+}
+
+.btn-primary:not(:disabled):hover,
+.btn-primary:not(:disabled):focus {
+  background: #0d4fa0;
+}
+
+.btn-link {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: dodgerblue;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  text-decoration: underline;
+}
+
+.btn-light {
+  background-color: #e5e5e5;
+  color: #404041;
+}
+
+.btn-light:hover,
+.btn-light:focus {
+  background-color: #ccc;
+}
+
+/* ---------- Card ---------- */
+.card {
+  background: #fff;
+  box-shadow: var(--shadow);
+  border-radius: 6px;
+}
+
+/* ---------- Avatar ------ */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* ---------- Modal ---------- */
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.45);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 6px;
+  width: 90%;
+  box-shadow: 0 0 30px -5px rgba(0, 0, 0, 0.25);
+  overflow-x: hidden;
+}
+
+/* ------- App ----------- */
+.App {
+  min-height: 100vh;
+  display: grid;
+  grid-auto-rows: auto 1fr;
+}
+
+/* ------- animation ------- */
+.fade-in-out {
+  animation: fade-in-out 3s ease-in-out infinite;
+}
+
+@keyframes fade-in-out {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+/* --------------- Chunks --------------- */
+.EditInfo__label {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--clr-primary);
+  margin-bottom: 0.75rem;
 }

@@ -1,0 +1,24 @@
+.ProfileIntro {
+  padding: 1rem;
+  color: #848484;
+}
+
+.ProfileIntro__header h3 {
+  font-size: 1.35rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.ProfileIntro li {
+  margin-bottom: 1.25rem;
+}
+
+.ProfileIntro__text {
+  margin-left: 1rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.ProfileIntro__text span {
+  color: #222;
+}

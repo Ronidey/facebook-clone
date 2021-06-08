@@ -1,0 +1,12 @@
+.ModalCreatePost__slider {
+  display: flex;
+  transition: transform 250ms ease-in-out;
+}
+
+.ModalCreatePost__slider.slide {
+  transform: translateX(-100%);
+}
+
+.ModalCreatePost__slider > div {
+  flex: 0 0 100%;
+}

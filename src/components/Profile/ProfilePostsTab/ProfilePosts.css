@@ -1,0 +1,17 @@
+.ProfilePosts {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .ProfilePosts {
+    grid-template-columns: minmax(200px, 40%) minmax(400px, 1fr);
+    align-items: flex-start;
+  }
+
+  .ProfilePosts__aside {
+    position: sticky;
+    top: 90px;
+  }
+}

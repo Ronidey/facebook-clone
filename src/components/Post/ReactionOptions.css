@@ -1,0 +1,40 @@
+.ReactionOptions {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  padding: 0.25rem;
+  border-radius: 100vh;
+  line-height: 0;
+  top: 0;
+  left: 10px;
+  width: 235px;
+  transform: translateY(-110%);
+  transition: all 400ms ease-in-out;
+}
+
+.ReactionOptions-enter {
+  transform: translateY(0);
+  visibility: hidden;
+  opacity: 0;
+  transition-delay: 750ms;
+}
+
+.ReactionOptions-enter-active {
+  transform: translateY(-110%);
+  visibility: visible;
+  opacity: 1;
+}
+
+.ReactionOptions__container {
+  width: 100%;
+}
+
+.ReactionOptions__btn {
+  cursor: pointer;
+  transition: transform 200ms ease-in-out;
+}
+
+.ReactionOptions__btn:hover,
+.ReactionOptions__btn:focus {
+  transform: scale(1.1) translateY(-5px);
+}

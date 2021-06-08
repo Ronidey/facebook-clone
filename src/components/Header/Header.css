@@ -1,0 +1,41 @@
+.Header {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-auto-rows: auto auto;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+}
+
+.logo {
+  width: 45px;
+}
+
+.Header__center {
+  grid-column: 1 /-1;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #ddd;
+}
+
+.Header__right {
+  align-self: center;
+}
+
+@media (min-width: 992px) {
+  .Header {
+    grid-template-columns: auto 1fr auto;
+    grid-auto-rows: auto;
+  }
+
+  .Header__center {
+    grid-column: initial;
+    grid-row: initial;
+    align-self: flex-end;
+    border: none;
+  }
+}

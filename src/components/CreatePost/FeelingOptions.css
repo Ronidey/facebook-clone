@@ -1,0 +1,8 @@
+.FeelingOptions__header {
+  padding: 1.25rem;
+}
+
+.FeelingOptions__header button {
+  position: absolute;
+  left: 10px;
+}

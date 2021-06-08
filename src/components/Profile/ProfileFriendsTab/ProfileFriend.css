@@ -1,0 +1,19 @@
+.ProfileFriend__img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.ProfileFriend__name {
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+}
+
+.ProfileFriend__bio {
+  font-weight: 400;
+  color: #555;
+  margin: 0;
+}

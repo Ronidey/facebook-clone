@@ -1,0 +1,29 @@
+.UserIntro {
+  position: relative;
+  padding-top: 2.5rem;
+}
+
+.UserIntro__img-wrapper {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -80%);
+  width: 150px;
+  height: 150px;
+}
+
+.UserIntro__name {
+  font-size: 1.75rem;
+  color: #000;
+}
+
+.UserIntro__bio {
+  font-size: 1.05rem;
+  color: #6c6a6a;
+  font-weight: 500;
+  white-space: pre-line;
+  margin-bottom: 0.5rem;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}

@@ -1,0 +1,12 @@
+.CreatePost {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.CreatePost__input {
+  background: var(--clr-light);
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 100vh;
+}

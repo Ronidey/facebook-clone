@@ -1,0 +1,13 @@
+.User__img {
+  margin-right: 0.5rem;
+}
+
+.User__name {
+  font-weight: 600;
+  color: #333;
+}
+
+.timeAgo {
+  font-size: 0.8rem;
+  color: #999;
+}

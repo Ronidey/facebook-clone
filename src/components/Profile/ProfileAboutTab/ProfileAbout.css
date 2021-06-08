@@ -1,0 +1,36 @@
+.ProfileAbout__content {
+  display: grid;
+  grid-template-columns: 100%;
+}
+
+.ProfileAbout__content > div:first-child {
+  border-right: 1px solid #ddd;
+}
+
+.ProfileAbout__link {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #555;
+  display: block;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.ProfileAbout__link.is-active {
+  color: var(--clr-primary);
+  background-color: #0064e01f;
+}
+
+.ProfileAbout__overview ul {
+  color: #555;
+}
+
+.ProfileAbout__overview li {
+  margin: 1rem 0 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .ProfileAbout__content {
+    grid-template-columns: 30% 70%;
+  }
+}

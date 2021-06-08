@@ -1,0 +1,72 @@
+.Chat {
+  position: fixed;
+  bottom: 0;
+  right: 150px;
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
+  box-shadow: 0 0 50px -10px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+}
+
+.Chat__body {
+  height: 400px;
+  overflow: auto;
+}
+
+.Chat__body__intro p {
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
+.message {
+  width: 70%;
+  display: flex;
+}
+
+.message--left .message__user {
+  margin-right: 0.5rem;
+}
+
+.message--right {
+  align-self: flex-end;
+}
+
+.message--right .message__text {
+  background: var(--clr-primary);
+  color: #fff;
+}
+
+.message--right .message__user {
+  order: 1;
+  margin-left: 0.5rem;
+}
+
+.message__user {
+  align-self: flex-end;
+}
+
+.message__text {
+  background: var(--clr-light);
+  flex: 1;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.ChatMob,
+.ChatMob__footer {
+  background: #fff;
+}
+
+.ChatMob__body {
+  padding-bottom: 6rem;
+}
+
+.ChatMob__footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  box-shadow: 0 -2px 20px rgba(0, 0, 0, 0.15);
+}

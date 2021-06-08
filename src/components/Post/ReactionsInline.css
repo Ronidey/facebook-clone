@@ -1,0 +1,13 @@
+.ReactionsInline:hover,
+.ReactionsInline:focus {
+  cursor: pointer;
+}
+
+.ReactionsInline img {
+  width: 20px;
+  margin-right: 0.2rem;
+}
+
+.ReactionsInline__count {
+  margin-left: 0.35rem;
+}
