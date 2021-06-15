@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 function Tabs({ spacing, children, fontSize }) {
   const classes = useStyles({ spacing });
+
   return (
     <div className={`d-flex align-center ${classes.root}`}>
       {/* Passing props to each element of children array */}

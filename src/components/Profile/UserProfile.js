@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import Profile from './Profile';
-
+import ProfilePlaceholder from '../Placeholders/ProfilePlaceholder';
 import AppContext from '../../AppContext';
+
+const Profile = React.lazy(() => import('./Profile'));
 
 function UserProfile() {
   const { appState } = useContext(AppContext);
@@ -12,7 +13,11 @@ function UserProfile() {
 
   if (myAccount) return <Redirect to='/my-profile' />;
 
-  return <Profile user={user} myAccount={myAccount} />;
+  return (
+    <React.Suspense fallback={<ProfilePlaceholder />}>
+      <Profile user={user} myAccount={myAccount} />
+    </React.Suspense>
+  );
 }
 
 export default UserProfile;

@@ -1,0 +1,33 @@
+.Message {
+  width: 70%;
+  display: flex;
+}
+
+.Message--left .Message__user {
+  margin-right: 0.5rem;
+}
+
+.Message--right {
+  align-self: flex-end;
+}
+
+.Message--right .Message__text {
+  background: var(--clr-primary);
+  color: #fff;
+}
+
+.Message--right .Message__user {
+  order: 1;
+  margin-left: 0.5rem;
+}
+
+.Message__user {
+  align-self: flex-end;
+}
+
+.Message__text {
+  background: var(--clr-light);
+  flex: 1;
+  border-radius: 1rem;
+  padding: 1rem;
+}

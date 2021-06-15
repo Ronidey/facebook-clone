@@ -24,7 +24,7 @@ function Contact({ user }) {
     >
       <div className='Contact d-flex align-center'>
         <div className='Contact__img-wrapper p-relative mr-md'>
-          <Avatar src={user.avatar} alt={user.firstName} size='100%' />
+          <Avatar src={user.avatar} alt={user.firstName} size='50px' />
           <span className='active-dot'></span>
         </div>
         <span>

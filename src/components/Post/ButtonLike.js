@@ -1,23 +1,36 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
 import ReactionOptions from './ReactionOptions';
 import { CSSTransition } from 'react-transition-group';
+import { isMobile } from 'react-device-detect';
 
-import AppContext from '../../AppContext';
-import { PostContext } from '../../AppContext';
+import AppContext, { PostContext } from '../../AppContext';
 import ClickableDiv from '../Global/ClickableDiv';
 
 function ButtonLike() {
   const { appState, appDispatch } = useContext(AppContext);
   const post = useContext(PostContext);
   const [showReacts, setShowReacts] = useState(false);
+  const [showReactsCount, setShowReactsCount] = useState(0);
+  let timerId;
+
+  useEffect(() => {
+    if (showReactsCount) {
+      timerId = setTimeout(() => {
+        setShowReacts(true);
+      }, 700);
+
+      return () => clearTimeout(timerId);
+    }
+  }, [showReactsCount]);
 
   const showReactOptions = () => {
-    setShowReacts(true);
+    setShowReactsCount(showReactsCount + 1);
   };
 
   const hideReactOptions = () => {
+    clearTimeout(timerId);
     setShowReacts(false);
   };
 
@@ -57,6 +70,8 @@ function ButtonLike() {
   }
 
   const handleClick = (e) => {
+    setShowReactsCount(0); //Don't remove this line, bug fix
+
     if (myReact) {
       appDispatch({
         type: 'removeReaction',
@@ -78,30 +93,57 @@ function ButtonLike() {
   };
 
   return (
-    <ClickableDiv
-      aria-label='like'
-      onMouseEnter={showReactOptions}
-      onFocus={showReactOptions}
-      onMouseLeave={hideReactOptions}
-      onClick={handleClick}
-      style={{ flex: '0 0 33.33%' }}
-    >
-      <div className='d-flex justify-center align-center p-relative'>
-        {btn}
-
-        <CSSTransition
-          in={showReacts}
-          timeout={400}
-          classNames='ReactionOptions'
-          unmountOnExit
+    <>
+      {isMobile ? (
+        <ClickableDiv
+          aria-label='like'
+          onTouchStart={showReactOptions}
+          onBlur={hideReactOptions}
+          onClick={handleClick}
+          style={{ flex: '0 0 33.33%' }}
         >
-          <ReactionOptions
-            hideReactOptions={hideReactOptions}
-            handleReactionClick={handleReactionClick}
-          />
-        </CSSTransition>
-      </div>
-    </ClickableDiv>
+          <div className='d-flex justify-center align-center p-relative'>
+            {btn}
+
+            <CSSTransition
+              in={showReacts}
+              timeout={400}
+              classNames='ReactionOptions'
+              unmountOnExit
+            >
+              <ReactionOptions
+                hideReactOptions={hideReactOptions}
+                handleReactionClick={handleReactionClick}
+              />
+            </CSSTransition>
+          </div>
+        </ClickableDiv>
+      ) : (
+        <ClickableDiv
+          aria-label='like'
+          onMouseEnter={showReactOptions}
+          onMouseLeave={hideReactOptions}
+          onClick={handleClick}
+          style={{ flex: '0 0 33.33%' }}
+        >
+          <div className='d-flex justify-center align-center p-relative'>
+            {btn}
+
+            <CSSTransition
+              in={showReacts}
+              timeout={400}
+              classNames='ReactionOptions'
+              unmountOnExit
+            >
+              <ReactionOptions
+                hideReactOptions={hideReactOptions}
+                handleReactionClick={handleReactionClick}
+              />
+            </CSSTransition>
+          </div>
+        </ClickableDiv>
+      )}
+    </>
   );
 }
 

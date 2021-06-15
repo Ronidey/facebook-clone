@@ -16,7 +16,6 @@
   transform: translateY(0);
   visibility: hidden;
   opacity: 0;
-  transition-delay: 750ms;
 }
 
 .ReactionOptions-enter-active {

@@ -1,15 +1,20 @@
 import React, { useContext } from 'react';
 import AppContext from '../../AppContext';
 import Post from './Post';
+import SharedPost from './SharedPost';
 
-function Posts() {
+function Posts({ posts }) {
   const { appState } = useContext(AppContext);
+  const allPosts = posts || appState.posts;
 
   return (
     <div className='Posts'>
-      {appState.posts.map((p) => (
-        <Post key={p.id} post={p} />
-      ))}
+      {allPosts.map((p) => {
+        if (p.isShared) {
+          return <SharedPost key={p.id} post={p} />;
+        }
+        return <Post key={p.id} post={p} />;
+      })}
     </div>
   );
 }

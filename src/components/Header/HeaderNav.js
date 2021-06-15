@@ -11,7 +11,7 @@ function HeaderNav() {
         <Tab to='/' exact={true}>
           <FaHome />
         </Tab>
-        <Tab to='/friends'>
+        <Tab to='/friends' exact={true}>
           <FaUserFriends />
         </Tab>
         {window.innerWidth < 768 && (

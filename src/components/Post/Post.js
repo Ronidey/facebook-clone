@@ -8,7 +8,7 @@ import AppContext from '../../AppContext';
 import { PostContext } from '../../AppContext';
 
 function Post({ post }) {
-  const { appDispatch } = useContext(AppContext);
+  const { appState, appDispatch } = useContext(AppContext);
 
   const editPost = () => {
     appDispatch({
@@ -26,12 +26,13 @@ function Post({ post }) {
 
   return (
     <PostContext.Provider value={post}>
-      <div className='Post card'>
+      <div className='Post my-lg card'>
         <PostHeader
           author={post.author}
           editPost={editPost}
           deletePost={deletePost}
           postId={post.id}
+          menu={appState.user.id == post.author.id}
         />
         <hr style={{ margin: '0.25rem 0' }} />
 

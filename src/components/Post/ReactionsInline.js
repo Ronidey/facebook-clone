@@ -40,9 +40,11 @@ function ReactionsInline() {
                   <img
                     key={r}
                     src={require(`../../images/reactions/${r}.svg`).default}
+                    alt=''
                   />
                 );
               }
+              return false;
             })}
             <span className='ReactionsInline__count'>
               {post.reactions.length}

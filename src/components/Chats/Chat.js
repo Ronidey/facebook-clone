@@ -1,63 +1,79 @@
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef, useEffect, useState } from 'react';
 import StyledLink from '../Global/StyledLink';
 import Avatar from '../Global/Avatar';
 import './Chat.css';
 import CloseIcon from '@material-ui/icons/Close';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { IconButton } from '@material-ui/core';
-import ChatForm from './ChatForm';
 
 import AppContext from '../../AppContext';
+import SendForm from '../Global/SendForm';
+import Message from './Message';
+import { v4 } from 'uuid';
 
-function Chat({ user }) {
-  const { appDispatch } = useContext(AppContext);
+function Chat({ friend }) {
+  const { appState, appDispatch } = useContext(AppContext);
+  const [messages, setMessages] = useState([]);
   const chatBodyRef = useRef(null);
 
   const handleMinimize = (e) => {
     appDispatch({
       type: 'chatMinimize',
-      payload: e.currentTarget.dataset.user
+      payload: e.currentTarget.dataset.friend
     });
   };
 
   const handleRemove = (e) => {
     appDispatch({
       type: 'removeChat',
-      payload: e.currentTarget.dataset.user
+      payload: e.currentTarget.dataset.friend
     });
   };
 
-  useEffect(() => {
-    const el = chatBodyRef.current;
+  const sendMessage = (text) => {
+    setMessages([
+      ...messages,
+      {
+        id: v4(),
+        user: appState.user,
+        text
+      }
+    ]);
+  };
 
-    el.scroll({
-      top: el.scrollHeight - el.offsetHeight,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }, []);
+  useEffect(() => {
+    if (messages.length) {
+      const el = chatBodyRef.current;
+
+      el.scroll({
+        top: el.scrollHeight - el.offsetHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  }, [messages.length]);
 
   return (
     <div className='Chat'>
       <header className='Chat__header d-flex align-center justify-between p-sm'>
         <div>
-          <StyledLink to={`/users/${user.id}/profile`}>
+          <StyledLink to={`/users/${friend.id}/profile`}>
             <div className='d-flex align-center'>
               <Avatar
-                src={user.avatar}
-                alt={user.firstName}
+                src={friend.avatar}
+                alt={friend.firstName}
                 className='mr-sm'
               />
-              <span>{user.firstName}</span>
+              <span>{friend.firstName}</span>
             </div>
           </StyledLink>
         </div>
         <div>
-          <IconButton data-user={user.id} onClick={handleMinimize}>
+          <IconButton data-friend={friend.id} onClick={handleMinimize}>
             <RemoveIcon />
           </IconButton>
 
-          <IconButton data-user={user.id} onClick={handleRemove}>
+          <IconButton data-friend={friend.id} onClick={handleRemove}>
             <CloseIcon />
           </IconButton>
         </div>
@@ -66,9 +82,9 @@ function Chat({ user }) {
 
       <div className='Chat__body' ref={chatBodyRef}>
         <div className='Chat__body__intro text-center my-md'>
-          <Avatar src={user.avatar} size='70px' />
+          <Avatar src={friend.avatar} size='70px' />
           <h4>
-            {user.firstName} {user.lastName}
+            {friend.firstName} {friend.lastName}
           </h4>
           <p>Facebook</p>
           <p>You are friends on Facebook</p>
@@ -76,49 +92,17 @@ function Chat({ user }) {
 
         {/* Messages */}
         <div className='d-flex flex-column'>
-          <div className='message message--left mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-
-          <div className='message message--left mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
+          {messages.map((m) => (
+            <Message
+              key={m.id}
+              message={m}
+              isMyMessage={appState.user.id == m.user.id}
+            />
+          ))}
         </div>
       </div>
       <footer className='Chat__footer'>
-        <ChatForm />
+        <SendForm onSubmit={sendMessage} />
       </footer>
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
 import AppContext from '../../AppContext';
 import EditInfo from './EditInfo/EditInfo';
-import Profile from './Profile';
+import ProfilePlaceholder from '../Placeholders/ProfilePlaceholder';
+const Profile = React.lazy(() => import('./Profile'));
 
 function MyProfile() {
   const { appState } = useContext(AppContext);
@@ -16,7 +17,7 @@ function MyProfile() {
   };
 
   return (
-    <>
+    <React.Suspense fallback={<ProfilePlaceholder />}>
       <Profile
         user={appState.user}
         myAccount={true}
@@ -25,7 +26,7 @@ function MyProfile() {
       {showEditInfo && (
         <EditInfo user={appState.user} closeEditInfo={closeEditInfo} />
       )}
-    </>
+    </React.Suspense>
   );
 }
 

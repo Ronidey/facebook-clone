@@ -169,6 +169,10 @@ ul {
   margin-right: 2rem;
 }
 
+.ml-auto {
+  margin-left: auto;
+}
+
 .mb-0 {
   margin-bottom: 0;
 }
@@ -295,7 +299,7 @@ ul {
 }
 
 .btn-lg {
-  width: 100px;
+  min-width: 100px;
   height: 40px;
 }
 
@@ -384,6 +388,7 @@ ul {
   min-height: 100vh;
   display: grid;
   grid-auto-rows: auto 1fr;
+  align-items: start;
 }
 
 /* ------- animation ------- */
@@ -393,7 +398,7 @@ ul {
 
 @keyframes fade-in-out {
   50% {
-    opacity: 0.25;
+    opacity: 0.5;
   }
 }
 
@@ -403,4 +408,25 @@ ul {
   font-weight: 500;
   color: var(--clr-primary);
   margin-bottom: 0.75rem;
+}
+
+/* --------- Loading ---------- */
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.loading__ball {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #efefef;
+}
+
+.loading__ball + .loading__ball {
+  margin-left: 0.5rem;
 }

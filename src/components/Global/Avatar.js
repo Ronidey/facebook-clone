@@ -3,17 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 function Avatar({ src, alt, size, radius, className, ...rest }) {
   const classes = useStyles({ size, radius });
+
   return (
-    <img
-      className={`${classes.root} ${className ? className : ''}`}
-      src={
-        src
-          ? require(`../../images/users/${src}`).default
-          : require(`../../images/users/user-default.jpg`).default
-      }
-      alt={alt || ''}
-      {...rest}
-    />
+    <>
+      <img
+        className={`${classes.root} ${className ? className : ''}`}
+        src={require(`../../images/users/${src}`).default}
+        alt={alt || ''}
+        {...rest}
+      />
+    </>
   );
 }
 
@@ -27,4 +26,4 @@ const useStyles = makeStyles({
   })
 });
 
-export default Avatar;
+export default React.memo(Avatar);

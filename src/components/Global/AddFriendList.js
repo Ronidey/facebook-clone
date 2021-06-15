@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AddFriend from './AddFriend';
 import { makeStyles } from '@material-ui/core/styles';
 import AppContext from '../../AppContext';
 
 function AddFriendList(props) {
   const { appState } = useContext(AppContext);
+  const [suggestions, setSuggestions] = useState([]);
 
   // Filtering out the current user
-  let otherUsers = [];
+  const otherUsers = [];
   for (let user of appState.users) {
     let isFriend = false;
 
@@ -23,18 +24,31 @@ function AddFriendList(props) {
     }
   }
 
+  useEffect(() => {
+    setSuggestions([...otherUsers]);
+  }, []);
+
+  const removeSuggestion = (id) => {
+    setSuggestions((state) => [...state].filter((u) => u.id != id));
+  };
+
   const classes = useStyles({ maxHeight: props.maxHeight || 'initial' });
 
   return (
     <>
-      {otherUsers.length > 0 && (
+      {suggestions.length > 0 && (
         <div className={classes.root}>
           <header className='mb-md'>
             <h4 className={classes.heading}>People you may know</h4>
           </header>
           <div>
-            {otherUsers.map((user) => (
-              <AddFriend mobile={props.mobile} key={user.id} user={user} />
+            {suggestions.map((user) => (
+              <AddFriend
+                handleRemove={removeSuggestion}
+                mobile={props.mobile}
+                key={user.id}
+                user={user}
+              />
             ))}
           </div>
         </div>

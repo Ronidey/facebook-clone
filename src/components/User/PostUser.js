@@ -21,4 +21,4 @@ function PostUser({ user, feeling }) {
   );
 }
 
-export default PostUser;
+export default React.memo(PostUser);

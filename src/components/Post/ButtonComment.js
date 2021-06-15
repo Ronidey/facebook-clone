@@ -2,9 +2,13 @@ import React from 'react';
 import ChatOutlinedIcon from '@material-ui/icons/ChatOutlined';
 import ClickableDiv from '../Global/ClickableDiv';
 
-function ButtonComment() {
+function ButtonComment(props) {
   return (
-    <ClickableDiv aria-label='comment' style={{ flex: '0 0 33.33%' }}>
+    <ClickableDiv
+      onClick={props.onClick}
+      aria-label='comment'
+      style={{ flex: '0 0 33.33%' }}
+    >
       <div className='d-flex justify-center align-center p-relative'>
         <div className='d-flex align-center'>
           <ChatOutlinedIcon />

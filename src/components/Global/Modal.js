@@ -20,7 +20,9 @@ function Modal({ show, onClose, maxWidth, children }) {
     width: '90%',
     boxShadow: '0 0 30px -5px rgba(0, 0, 0, 0.25)',
     overflowX: 'hidden',
-    maxWidth: maxWidth || 'initial'
+    maxWidth: maxWidth || 'initial',
+    maxHeight: '90vh',
+    overflowY: 'auto'
   };
 
   const handleClick = (e) => {

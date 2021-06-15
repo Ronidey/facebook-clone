@@ -3,10 +3,6 @@
   padding: 0.25rem 0;
 }
 
-.Post {
-  margin-bottom: 1rem;
-}
-
 .Post__header {
   padding: 0.5rem;
   padding-bottom: 0.25rem;
@@ -16,6 +12,7 @@
   padding: 0.5rem 1rem;
   color: #111;
   font-size: 1rem;
+  white-space: pre-wrap;
 }
 
 .Post__img {

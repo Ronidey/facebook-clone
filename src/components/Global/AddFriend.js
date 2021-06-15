@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import AddButton from './AddButton';
 import StyledLink from './StyledLink';
 import Avatar from './Avatar';
 
-function AddFriend({ user }) {
+import AppContext from '../../AppContext';
+
+function AddFriend({ user, handleRemove }) {
+  const { appState } = useContext(AppContext);
   const [hovered, setIsHovered] = useState(false);
+  const [friendReqSent, setFriendReqSent] = useState(
+    appState.user.fR.sent.includes(user.id)
+  );
 
   const addIsHovered = () => {
     setIsHovered(true);
@@ -12,6 +18,12 @@ function AddFriend({ user }) {
 
   const removeIsHovered = (e) => {
     setIsHovered(false);
+  };
+
+  const handleRemoveClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleRemove(user.id);
   };
 
   return (
@@ -25,23 +37,27 @@ function AddFriend({ user }) {
       <div className='d-flex align-center'>
         <Avatar src={user.avatar} alt={user.firstName} size='70px' />
         <div className='flex-1 ml-md'>
-          <h5>
+          <h4 className='mb-md'>
             {user.firstName} {user.lastName}
-          </h5>
+          </h4>
           <div className='d-flex space-between'>
             <AddButton
               onMouseEnter={removeIsHovered}
               onMouseLeave={addIsHovered}
               otherUserId={user.id}
+              callback={setFriendReqSent}
               className='flex-1 mr-sm btn btn-primary'
             />
-            <button
-              onMouseEnter={removeIsHovered}
-              onMouseLeave={addIsHovered}
-              className='flex-1 btn btn-light'
-            >
-              Remove
-            </button>
+            {!friendReqSent && (
+              <button
+                onMouseEnter={removeIsHovered}
+                onMouseLeave={addIsHovered}
+                onClick={handleRemoveClick}
+                className='flex-1 btn btn-light'
+              >
+                Remove
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -49,4 +65,4 @@ function AddFriend({ user }) {
   );
 }
 
-export default AddFriend;
+export default React.memo(AddFriend);

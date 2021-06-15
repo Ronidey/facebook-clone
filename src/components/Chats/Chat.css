@@ -19,38 +19,8 @@
   margin-bottom: 0;
 }
 
-.message {
-  width: 70%;
-  display: flex;
-}
-
-.message--left .message__user {
-  margin-right: 0.5rem;
-}
-
-.message--right {
-  align-self: flex-end;
-}
-
-.message--right .message__text {
-  background: var(--clr-primary);
-  color: #fff;
-}
-
-.message--right .message__user {
-  order: 1;
-  margin-left: 0.5rem;
-}
-
-.message__user {
-  align-self: flex-end;
-}
-
-.message__text {
-  background: var(--clr-light);
-  flex: 1;
-  border-radius: 1rem;
-  padding: 1rem;
+.ChatMob {
+  height: 100%;
 }
 
 .ChatMob,

@@ -26,6 +26,7 @@ function ModalCreatePost() {
       payload: {
         ...post,
         reactions: [],
+        comments: [],
         author: authorFeeling
           ? { ...appState.user, feeling: authorFeeling }
           : appState.user,

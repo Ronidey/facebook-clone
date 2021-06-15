@@ -20,7 +20,10 @@ function ReactionsListItem({ reaction }) {
       <UserReaction user={reaction.user} reaction={reaction.reaction} />
       {!isFriend(reaction.user) && (
         <div>
-          <AddButton className='btn btn-lg btn-light' />
+          <AddButton
+            otherUserId={reaction.user.id}
+            className='btn btn-lg btn-light'
+          />
         </div>
       )}
     </div>

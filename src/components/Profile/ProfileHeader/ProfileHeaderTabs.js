@@ -10,10 +10,10 @@ function ProfileHeaderTabs() {
         <Tab to='/' exact={true}>
           <span>Posts</span>
         </Tab>
-        <Tab to='/about'>
+        <Tab to='/about-tab'>
           <span>About</span>
         </Tab>
-        <Tab to='/friends'>
+        <Tab to='/friends-tab'>
           <span>Friends</span>
         </Tab>
       </Tabs>

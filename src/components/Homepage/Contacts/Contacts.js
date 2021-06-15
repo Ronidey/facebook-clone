@@ -1,6 +1,5 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import AppConext from '../../../AppContext';
-import users from '../../../dev-data/usersData';
 import Contact from './Contact';
 
 function Contacts() {

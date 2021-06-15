@@ -1,31 +1,54 @@
-import React, { useRef, useContext, useEffect, useState } from 'react';
+import React, { useRef, useContext, useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import StyledLink from '../Global/StyledLink';
+import { v4 } from 'uuid';
 import Avatar from '../Global/Avatar';
-import ChatForm from './ChatForm';
 import './Chat.css';
 
 import AppContext from '../../AppContext';
+import SendForm from '../Global/SendForm';
+import Message from './Message';
 
 function ChatMob() {
-  const { getUserById } = useContext(AppContext);
+  const { appState } = useContext(AppContext);
   const chatBodyRef = useRef(null);
   const { id } = useParams();
-  const [user, setUser] = useState(null);
+  const friend = appState.user.friends.find((u) => u.id == id);
+  const [messages, setMessages] = useState([]);
+
+  const sendMessage = (text) => {
+    setMessages([
+      ...messages,
+      {
+        id: v4(),
+        user: appState.user,
+        text
+      }
+    ]);
+  };
 
   useEffect(() => {
-    setUser(getUserById(id));
-  }, []);
+    if (messages.length) {
+      window.scroll({
+        top: document.body.offsetHeight,
+        left: 0,
+        behavior: 'smooth'
+      });
+    }
+  }, [messages.length]);
 
-  if (!user) return <h2>Loading...</h2>;
+  if (!friend) {
+    return (
+      <h1 className='text-center p-lg'>No Friend Found With The Given ID</h1>
+    );
+  }
 
   return (
     <div className='ChatMob'>
       <div className='ChatMob__body' ref={chatBodyRef}>
         <div className='ChatMob__body__intro text-center my-md'>
-          <Avatar src={user.avatar} size='70px' />
+          <Avatar src={friend.avatar} size='70px' />
           <h4>
-            {user.firstName} {user.lastName}
+            {friend.firstName} {friend.lastName}
           </h4>
           <p>Facebook</p>
           <p>You are friends on Facebook</p>
@@ -33,94 +56,17 @@ function ChatMob() {
 
         {/* Messages */}
         <div className='d-flex flex-column'>
-          <div className='message message--left mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-
-          <div className='message message--left mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
-          <div className='message message--right mb-md mx-sm'>
-            <div className='message__user'>
-              <Avatar src={user.avatar} size='30px' />
-            </div>
-            <div className='message__text'>
-              Hi bro! how are you my friend? are you doing good? long time no
-              see....
-            </div>
-          </div>
+          {messages.map((m) => (
+            <Message
+              key={m.id}
+              message={m}
+              isMyMessage={appState.user.id == m.user.id}
+            />
+          ))}
         </div>
       </div>
       <footer className='ChatMob__footer'>
-        <ChatForm />
+        <SendForm onSubmit={sendMessage} />
       </footer>
     </div>
   );

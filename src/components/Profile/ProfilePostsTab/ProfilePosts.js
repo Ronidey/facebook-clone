@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import CreatePost from '../../CreatePost/CreatePost';
 import ProfileIntro from './ProfileIntro';
 import './ProfilePosts.css';
-import Post from '../../Post/Post';
 
 import AppContext from '../../../AppContext';
+import Posts from '../../Post/Posts';
 
 function ProfilePosts({ user, myAccount, openEditInfo }) {
   const { appState } = useContext(AppContext);
@@ -22,11 +22,7 @@ function ProfilePosts({ user, myAccount, openEditInfo }) {
       <div className='ProfilePosts__posts'>
         {myAccount && <CreatePost />}
 
-        <div>
-          {userPosts.map((p) => (
-            <Post key={p.id} post={p} />
-          ))}
-        </div>
+        <Posts posts={userPosts} />
       </div>
     </div>
   );

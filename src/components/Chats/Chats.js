@@ -8,7 +8,7 @@ function Chats({ chats }) {
     <div>
       <div>
         {chats.map(
-          (c) => !c.minimize && <Chat key={c.user.id} user={c.user} />
+          (c) => !c.minimize && <Chat key={c.user.id} friend={c.user} />
         )}
       </div>
       {minimizedChat.length && <ChatMinimized chats={minimizedChat} />}

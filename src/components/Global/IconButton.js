@@ -1,6 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core';
 
+function IconButton(props) {
+  const { background, color, children, onClick, ...rest } = props;
+  const classes = useStyles(props);
+
+  return (
+    <button onClick={onClick} className={classes.root} {...rest}>
+      <span className='icon'>{children}</span>
+    </button>
+  );
+}
+
 const useStyles = makeStyles({
   root: {
     margin: 0,
@@ -20,16 +31,5 @@ const useStyles = makeStyles({
     }
   }
 });
-
-function IconButton(props) {
-  const { background, color, children, ...rest } = props;
-  const classes = useStyles(props);
-
-  return (
-    <button {...rest} className={classes.root}>
-      <span className='icon'>{children}</span>
-    </button>
-  );
-}
 
 export default IconButton;

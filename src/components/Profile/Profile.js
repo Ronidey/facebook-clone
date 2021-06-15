@@ -1,12 +1,15 @@
-import React from 'react';
-import { useRouteMatch, Switch, Route, useParams } from 'react-router-dom';
-import UserIntro from './ProfilePostsTab/UserIntro';
+import React, { Suspense } from 'react';
+import { useRouteMatch, Switch, Route } from 'react-router-dom';
+import UserIntro from './UserIntro';
 
 import './Profile.css';
 import ProfileHeaderTabs from './ProfileHeader/ProfileHeaderTabs';
 import ProfilePosts from './ProfilePostsTab/ProfilePosts';
-import ProfileAbout from './ProfileAboutTab/ProfileAbout';
-import ProfileFriends from './ProfileFriendsTab/ProfileFriends';
+
+const ProfileAbout = React.lazy(() => import('./ProfileAboutTab/ProfileAbout'));
+const ProfileFriends = React.lazy(() =>
+  import('./ProfileFriendsTab/ProfileFriends')
+);
 
 function Profile({ user, myAccount, openEditInfo }) {
   const { url } = useRouteMatch();
@@ -36,12 +39,14 @@ function Profile({ user, myAccount, openEditInfo }) {
               openEditInfo={openEditInfo}
             />
           </Route>
-          <Route path={`${url}/about`}>
-            <ProfileAbout user={user} myAccount={myAccount} />
-          </Route>
-          <Route path={`${url}/friends`}>
-            <ProfileFriends user={user} myAccount={myAccount} />
-          </Route>
+          <Suspense fallback=''>
+            <Route path={`${url}/friends-tab`}>
+              <ProfileFriends user={user} myAccount={myAccount} />
+            </Route>
+            <Route path={`${url}/about-tab`}>
+              <ProfileAbout user={user} myAccount={myAccount} />
+            </Route>
+          </Suspense>
         </Switch>
       </div>
     </div>

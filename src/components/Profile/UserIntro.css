@@ -8,8 +8,6 @@
   top: 0;
   left: 50%;
   transform: translate(-50%, -80%);
-  width: 150px;
-  height: 150px;
 }
 
 .UserIntro__name {

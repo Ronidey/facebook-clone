@@ -1,15 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import User from '../Global/User';
-
-import AppContext from '../../AppContext';
 import PostUser from '../User/PostUser';
 
-function PostHeader({ author, editPost, deletePost }) {
-  const { appState } = useContext(AppContext);
+function PostHeader({ author, editPost, deletePost, menu }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const openMenu = (e) => {
@@ -35,7 +31,7 @@ function PostHeader({ author, editPost, deletePost }) {
     <header className='Post__header d-flex justify-between'>
       <PostUser user={author} feeling={author.feeling} />
 
-      {appState.user.id === author.id && (
+      {menu && (
         <>
           <IconButton aria-label='more' aria-haspopup='true' onClick={openMenu}>
             <MoreHorizIcon />
@@ -45,8 +41,10 @@ function PostHeader({ author, editPost, deletePost }) {
             open={Boolean(anchorEl)}
             onClose={closeMenu}
           >
-            <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
-            <MenuItem onClick={handleEditClick}>Edit</MenuItem>
+            {editPost && <MenuItem onClick={handleEditClick}>Edit</MenuItem>}
+            {deletePost && (
+              <MenuItem onClick={handleDeleteClick}>Delete</MenuItem>
+            )}
           </Menu>
         </>
       )}
